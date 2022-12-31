@@ -5,6 +5,7 @@
 import pygame
 from constants import * # All constants
 from trail import Trail # The trail class
+from slice_target import Slice_Target # The slice target class
 from menu import Menu   # The menu class
 
 # -----------
@@ -34,6 +35,11 @@ fps_clock = pygame.time.Clock()
 
 # Init objects for trail and menu
 trail = Trail(canvas=screen, color_scheme=(DARK_BLUE, BLUE, LIGHT_BLUE), width=TRAIL_CIRCLE_WIDTH, max_length=MAX_LEN_TRAIL)
+
+# >>> TEST
+test_target = Slice_Target(canvas=screen)
+#     TEST <<<
+
 game_menu = Menu(canvas=screen)
 
 game_state = "menu" # Possible gamestates: menu; running
@@ -53,6 +59,10 @@ while running:
     if game_state == "running":
         # Handle mouse for trail
         trail.handle_mouse()
+        
+        # >>> TEST
+        test_target.update()
+        #     TEST <<<
 
     if game_state == "menu":
         if game_menu.touched():
@@ -66,8 +76,14 @@ while running:
     screen.fill(BG_COLOR) 
 
     if game_state == "running":
+        # >>> TEST
+        test_target.draw()
+        #     TEST <<<
+        
         # Trail    
         trail.draw()
+
+        
 
     if game_state == "menu":
         game_menu.draw() 

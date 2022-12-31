@@ -3,7 +3,7 @@
 # ---------
 
 # Miscellaneous
-FULLSCREEN = True
+FULLSCREEN = False
 WINDOW_SIZE = (960, 540)
 
 
