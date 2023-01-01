@@ -3,7 +3,7 @@
 # ---------
 
 # Miscellaneous
-FULLSCREEN = True
+FULLSCREEN = False
 WINDOW_SIZE = (960, 540)
 
 
@@ -15,4 +15,4 @@ BG_COLOR = (0, 0, 0)
 
 # Trail
 MAX_LEN_TRAIL = 40
-TRAIL_CIRCLE_WIDTH = 20
+TRAIL_CIRCLE_WIDTH = 10

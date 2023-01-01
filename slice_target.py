@@ -15,6 +15,8 @@ class Slice_Target:
         self.y_speed = y_speed
         self.gravity = gravity     
 
+        self.target_rect = pygame.Rect(0,0,0,0)
+
     def update(self, mouse_x, mouse_y, mouse_pressed):
 
         # Update if still flying and not touched
@@ -25,8 +27,7 @@ class Slice_Target:
             self.y_speed += self.gravity
         
             # See if target is touched
-            i = int(self.width)/2
-            target_rect = pygame.Rect(self.x_pos-i, self.y_pos-i, self.x_pos+i, self.y_pos+i)
+            target_rect = pygame.Rect(self.x_pos-self.width, self.y_pos-self.width, self.width*2, self.width*2)            
             if mouse_pressed and target_rect.collidepoint(mouse_x, mouse_y):
                 self.status = "chopped"
                 # Create 2 objects to fall down
@@ -48,9 +49,8 @@ class Slice_Target:
 
     def draw(self):
         # Draw if target is not yet touched
-        if self.status == "flying":
-            pygame.draw.circle(self.canvas, (150, 150, 150), (self.x_pos, self.y_pos), self.width)
-
+        if self.status == "flying":            
+            pygame.draw.circle(self.canvas, (150, 150, 150), (self.x_pos, self.y_pos), self.width)            
         if self.status == "chopped":
             pygame.draw.circle(self.canvas, (150, 150, 150), (self.x1_pos, self.y1_pos), self.width/2)
             pygame.draw.circle(self.canvas, (150, 150, 150), (self.x2_pos, self.y2_pos), self.width/2)
