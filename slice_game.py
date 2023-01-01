@@ -37,7 +37,7 @@ fps_clock = pygame.time.Clock()
 trail = Trail(canvas=screen, color_scheme=(DARK_BLUE, BLUE, LIGHT_BLUE), width=TRAIL_CIRCLE_WIDTH, max_length=MAX_LEN_TRAIL)
 
 # >>> TEST
-test_target = Slice_Target(canvas=screen)
+test_target = Slice_Target(canvas=screen, x_pos=100, x_speed=5, y_pos=600, y_speed=-12, gravity=0.15, width=30)
 #     TEST <<<
 
 game_menu = Menu(canvas=screen)
@@ -61,7 +61,9 @@ while running:
         trail.handle_mouse()
         
         # >>> TEST
-        test_target.update()
+        mouse_x, mouse_y  = pygame.mouse.get_pos()
+        mouse_click = pygame.mouse.get_pressed()
+        test_target.update(mouse_x, mouse_y, mouse_click[0])
         #     TEST <<<
 
     if game_state == "menu":
