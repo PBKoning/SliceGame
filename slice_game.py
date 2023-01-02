@@ -37,7 +37,11 @@ fps_clock = pygame.time.Clock()
 trail = Trail(canvas=screen, color_scheme=(DARK_BLUE, BLUE, LIGHT_BLUE), width=TRAIL_CIRCLE_WIDTH, max_length=MAX_LEN_TRAIL)
 
 # >>> TEST
-test_target = Slice_Target(canvas=screen, x_pos=100, x_speed=5, y_pos=600, y_speed=-12, gravity=0.15, width=30)
+img_target = pygame.image.load(r'./images/target_01.png')
+img_target_slice_left = pygame.image.load(r'./images/target_01_slice_left.png')
+img_target_slice_right = pygame.image.load(r'./images/target_01_slice_right.png')
+target_images = (img_target, img_target_slice_left, img_target_slice_right)
+test_target = Slice_Target(canvas=screen, x_pos=100, x_speed=5, y_pos=600, y_speed=-12, gravity=0.15, width=30, images=target_images)
 #     TEST <<<
 
 game_menu = Menu(canvas=screen)
