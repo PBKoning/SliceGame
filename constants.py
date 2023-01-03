@@ -6,6 +6,8 @@
 FULLSCREEN = False
 WINDOW_SIZE = (960, 540)
 
+GAME_FPS = 60
+
 
 # Colors
 BLUE = (0, 0, 255)

@@ -3,7 +3,12 @@ import pygame
 class Slice_Target:
 
     def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, width, images):
+        
+        # Constants
+        self.ADJUST_X_SPEED_CHOPPED_PART_1 = 0.75
+        self.ADJUST_X_SPEED_CHOPPED_PART_2 = 1.75
 
+        # Init miscellaneous variables
         self.canvas=canvas
         self.status = "flying" 
         self.width = width
@@ -35,8 +40,14 @@ class Slice_Target:
                 # Create 2 objects to fall down
                 self.x1_pos = self.x2_pos = self.x_pos
                 self.y1_pos = self.y2_pos = self.y_pos
-                self.x1_speed = self.x_speed*0.75
-                self.x2_speed = self.x_speed*1.75 
+
+                # Change the x speed of those object to make them g=fall apart
+                if self.x_speed > 0:
+                    self.x1_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_1
+                    self.x2_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_2
+                else:
+                    self.x1_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_2
+                    self.x2_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_1
 
         # Update if chopped
         if self.status == "chopped":
@@ -52,14 +63,9 @@ class Slice_Target:
     def draw(self):
         # Draw if target is not yet touched
         if self.status == "flying":
-            # pygame.draw.rect(self.canvas, (150, 150, 150), self.rectangle)   
-            # self.rectangle = self.canvas.blit(self.images[0], (self.x_pos, self.y_pos))              
-            # pygame.draw.rect(self.canvas, (150, 150, 150), self.rectangle)   
             self.rectangle = self.canvas.blit(self.images[0], (self.x_pos, self.y_pos))              
-            # pygame.draw.circle(self.canvas, (150, 150, 150), (self.x_pos, self.y_pos), self.width)            
+
+        # Draw target if chopped         
         if self.status == "chopped":
             self.canvas.blit(self.images[1], (self.x1_pos, self.y1_pos)) 
             self.canvas.blit(self.images[2], (self.x2_pos, self.y2_pos)) 
-            
-            # pygame.draw.circle(self.canvas, (150, 150, 150), (self.x1_pos, self.y1_pos), self.width/2)
-            # pygame.draw.circle(self.canvas, (150, 150, 150), (self.x2_pos, self.y2_pos), self.width/2)

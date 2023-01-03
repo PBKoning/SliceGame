@@ -2,11 +2,12 @@ import pygame
 
 class Menu:
 
-    def __init__(self, canvas):
+    def __init__(self, canvas, max_len_trail):
 
         self.canvas = canvas
+        self.max_len_trail = max_len_trail
 
-        self.start_button = pygame.image.load(r'./images/menu.png')
+        self.start_button = pygame.image.load(r'./images/menu.png').convert_alpha()
         
         # Init coördinates of the image so it is centered
         w, h = canvas.get_size() # get width and height of canvas
@@ -21,13 +22,15 @@ class Menu:
         # Draw menu an store the returned rectangle. This is needed to see if mousse is pressed on image
         self.start_button_rect = self.canvas.blit(self.start_button, (self.start_button_x, self.start_button_y))
 
-    def touched(self):
+    def touched(self, trail_length):
+
+        self.trail_length = trail_length
 
         # Get mouse info
         self.mouse_click = pygame.mouse.get_pressed()
         self.mouse_x, self.mouse_y = pygame.mouse.get_pos()
 
-        # Return if mouse is pressed on menu image
-        if self.mouse_click[0]: 
+        # Return if mouse is pressed on menu image and if trail has certain length so it needs to be sliced
+        if self.mouse_click[0] and self.trail_length > self.max_len_trail/2: 
             # Mouse is pressed
             return self.start_button_rect.collidepoint(self.mouse_x, self.mouse_y)

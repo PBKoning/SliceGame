@@ -13,7 +13,7 @@ class Trail:
         self.trail = []
         self.old_pos = None
 
-    def handle_mouse(self):
+    def update(self):
 
         # Get mouse info
         self.mouse_click = pygame.mouse.get_pressed()
@@ -61,6 +61,8 @@ class Trail:
                 if len(self.trail) > 0:
                     del self.trail[0]
 
+    def get_len(self):
+        return len(self.trail)
 
     def draw(self):
         
