@@ -17,4 +17,4 @@ A touchscreen game based on Fruit Ninja - build with Python and PyGame
 
 04-01-2023 (1): Added HIDE_MOUSE to constants.py
 
-04-01-2023 (2): The main program is converted to a class. Added the GameLogic class that handles the targets, score, mistakes, etc. For now is throws 3 targets and repeats this whan these have completed their flight.
+04-01-2023 (2): The main program is converted to a class. Added the GameLogic class that handles the targets, score, mistakes, etc. For now it throws 3 targets and repeats this whan these have completed their flight.
