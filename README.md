@@ -15,4 +15,6 @@ A touchscreen game based on Fruit Ninja - build with Python and PyGame
 
 03-01-2023: Target chopped parts corrected for going from right to left. Images load with convert_alpha(). Trail is also visible when menu is shown. Menu button needs to be sliced.
 
-04-01-2023: Added HIDE_MOUSE to constants.py
+04-01-2023 (1): Added HIDE_MOUSE to constants.py
+
+04-01-2023 (2): The main program is converted to a class. Added the GameLogic class that handles the targets, score, mistakes, etc. For now is throws 3 targets and repeats this whan these have completed their flight.

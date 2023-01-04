@@ -47,7 +47,7 @@ class Slice_Target:
                     self.x2_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_2
                 else:
                     self.x1_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_2
-                    self.x2_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_1
+                    self.x2_speed = self.x_speed * self.ADJUST_X_SPEED_CHOPPED_PART_1            
 
         # Update if chopped
         if self.status == "chopped":
@@ -59,6 +59,15 @@ class Slice_Target:
             
             self.y_speed += self.gravity*3
 
+        # See if flight of target is complete (either chopped or not)
+        if self.status == "chopped" and self.y1_pos > self.max_y_pos:
+            print("succes!")
+            self.status = "succes"
+        if self.status == "flying" and self.y_pos > self.max_y_pos:        
+            print("failed!")
+            self.status = "failed"            
+
+        print(self.status)    
 
     def draw(self):
         # Draw if target is not yet touched
