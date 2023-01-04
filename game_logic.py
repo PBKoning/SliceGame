@@ -35,19 +35,17 @@ class GameLogic:
             else: 
                 tmp_list.append("keep")   # keep this target in the list  
 
-        print(tmp_list)
-
         for count, value in enumerate(tmp_list): # replace target in the target list whith the value "delete"
             if value == "delete":
                 self.targets[count] = "delete"
 
-        if "delete" in self.targets:             # delete all elements in the taregt list with the value "delete"
+        while "delete" in self.targets:             # delete all elements in the target list with the value "delete"
             self.targets.remove("delete")
 
 
         # >>> TEST
         if len(self.targets) == 0:
-            self.TEST_add_random_targets()                                  
+            self.TEST_add_random_targets()                                              
         #     TEST <<<
         
     # >>> TEST    
@@ -83,6 +81,5 @@ class GameLogic:
     #     TEST <<<
 
     def draw(self):
-
         for target in self.targets:
             target.draw()     

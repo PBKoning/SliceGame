@@ -66,9 +66,7 @@ class Slice_Target:
         if self.status == "flying" and self.y_pos > self.max_y_pos:        
             print("failed!")
             self.status = "failed"            
-
-        print(self.status)    
-
+        
     def draw(self):
         # Draw if target is not yet touched
         if self.status == "flying":
