@@ -23,8 +23,9 @@ else:
     # Window
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
-# Hide mouse
-pygame.mouse.set_visible(False)
+# Hide mouse if set
+if HIDE_MOUSE:
+    pygame.mouse.set_visible(False)
 
 # Setup clock for constant fps
 fps_clock = pygame.time.Clock()
