@@ -25,7 +25,7 @@ class SliceGame:
             screen_info = pygame.display.Info()
             self.screen = pygame.display.set_mode((screen_info.current_w, screen_info.current_h), pygame.FULLSCREEN)
         else:
-            # Windowed game
+            # Windowed game 
             self.screen = pygame.display.set_mode(WINDOW_SIZE)
 
         # Store width and heigth of Pygame screen. This may be different then expected when using PyDroid on an Android phone
@@ -35,8 +35,7 @@ class SliceGame:
 
         # Calculate the scale factor according to the window size 
         scale_factor_width = self.screen_width / DEFAULT_WINDOW_SIZE[0]
-        scale_factor_height = self.screen_height / DEFAULT_WINDOW_SIZE[1]
-        print(scale_factor_width, scale_factor_height)
+        scale_factor_height = self.screen_height / DEFAULT_WINDOW_SIZE[1]        
         if scale_factor_width < scale_factor_height:
             self.scale_factor = scale_factor_width
         else: 

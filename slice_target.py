@@ -13,6 +13,7 @@ class Slice_Target:
         self.status = "flying"         
         self.images = images
         self.rectangle = self.images[0].get_rect()
+        self.scored = False # For scorekeeping in game logic
         
         # Init variables for position and movement
         self.x_pos = x_pos

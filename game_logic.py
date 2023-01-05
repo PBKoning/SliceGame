@@ -7,7 +7,10 @@ class GameLogic:
     def __init__(self, canvas, scale_factor):
         self.canvas=canvas
         self.scale_factor = scale_factor
-        self.reset()
+
+        self.load_images() 
+
+        self.reset() # Reset score, number of missed targets and empty the target list
         
     def reset(self):
         self.score = 0
@@ -30,13 +33,24 @@ class GameLogic:
 
         tmp_list = [] # temporary list for deleting targets with a complete flight (succes or failed)
         for target in self.targets:
+            # If chopped add to score and mark target as 'scored'
             target.update(mouse_x, mouse_y, mouse_click[0])
+            if target.status == "chopped" and target.scored == False:
+                self.score += 1
+                target.scored = True
+                print(f"Score: {self.score} | Missed targets: {self.missed_targets}") 
+
+            # If flight has ended add mistake if not chopped and delete target from target list   
             if target.status == "succes" or target.status == "failed":
+                if target.status == "failed":                    
+                    self.missed_targets += 1
+                    print(f"Score: {self.score} | Missed targets: {self.missed_targets}")                    
                 tmp_list.append("delete") # delete this target from the list
             else: 
                 tmp_list.append("keep")   # keep this target in the list  
+            
 
-        for count, value in enumerate(tmp_list): # replace target in the target list whith the value "delete"
+        for count, value in enumerate(tmp_list): # replace target in the target list whith the string value "delete"
             if value == "delete":
                 self.targets[count] = "delete"
 
@@ -48,6 +62,9 @@ class GameLogic:
         if len(self.targets) == 0:
             self.TEST_add_random_targets()                                              
         #     TEST <<<
+
+    def load_images(self):
+        pass
         
     # >>> TEST    
     def TEST_add_random_targets(self):
