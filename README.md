@@ -24,3 +24,5 @@ A touchscreen game based on Fruit Ninja - build with Python and PyGame
 05-01-2023 (1): Added scaling for different screen sizes and a warning screen if screen is in portrait mode
 
 05-01-2023 (2): Added scoring to game logic (scores are only printed to console for now)
+
+05-01-2023 (3): Increased FPS from 60 to 144 to make movements more smooth. Also added the option to show FPS.

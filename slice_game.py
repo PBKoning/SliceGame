@@ -46,6 +46,11 @@ class SliceGame:
         if HIDE_MOUSE:
             pygame.mouse.set_visible(False)
 
+        # setup font
+        pygame.font.init() # you have to call this at the start, 
+                        # if you want to use this module.
+        self.font_arial_15 = pygame.font.SysFont('Arial', 15)
+
         # Setup clock for fixed fps
         self.fps_clock = pygame.time.Clock()
 
@@ -79,8 +84,17 @@ class SliceGame:
         self.game_state = self.old_game_state = "menu" # Possible gamestates: menu; running; game-over; portrait-mode
 
     def draw_screen(self):
+
         # Background
         self.screen.fill(BG_COLOR) 
+
+        # Show FPS in caption and on screen
+        if SHOW_FPS:
+            str_fps = "fps: "+str(int(self.fps_clock.get_fps()) )
+            pygame.display.set_caption(str_fps)
+            textsurface = self.font_arial_15.render(str_fps, False, (0, 128, 21))
+            self.screen.blit(textsurface,(0,0))
+
 
         # Trail
         self.trail.draw()
