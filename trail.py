@@ -2,12 +2,12 @@ import pygame
 
 class Trail:
 
-    def __init__(self, canvas, color_scheme, width=10, max_length=50):
+    def __init__(self, canvas, color_scheme, width=10, max_length=50, scale_factor=1):
         
         # init variables
         self.canvas = canvas
         self.color_scheme = color_scheme
-        self.width = width
+        self.width = int(width * scale_factor)
         self.max_length = max_length
         
         self.trail = []

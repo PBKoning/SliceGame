@@ -1,11 +1,12 @@
 import pygame, random
 from slice_target import Slice_Target   
+from utilities import *
 
 class GameLogic:
 
-    def __init__(self, canvas):
+    def __init__(self, canvas, scale_factor):
         self.canvas=canvas
-
+        self.scale_factor = scale_factor
         self.reset()
         
     def reset(self):
@@ -51,33 +52,36 @@ class GameLogic:
     # >>> TEST    
     def TEST_add_random_targets(self):
         img_target = pygame.image.load(r'./images/target_01.png').convert_alpha()
+        img_target = scale_image_by_factor(img_target, self.scale_factor)
         img_target_slice_left = pygame.image.load(r'./images/target_01_slice_left.png').convert_alpha()
+        img_target_slice_left = scale_image_by_factor(img_target_slice_left, self.scale_factor)
         img_target_slice_right = pygame.image.load(r'./images/target_01_slice_right.png').convert_alpha()
+        img_target_slice_right = scale_image_by_factor(img_target_slice_right, self.scale_factor)
+
         target_images = (img_target, img_target_slice_left, img_target_slice_right)
         self.targets.append(Slice_Target(canvas=self.canvas, 
-                                            x_pos=random.randint(600, 900), 
-                                            x_speed=random.randint(-4, -2), 
-                                            y_pos=800, 
-                                            y_speed=random.randint(-16,-12), 
-                                            gravity=0.15, 
-                                            width=30, 
-                                            images=target_images))   
-        self.targets.append(Slice_Target(canvas=self.canvas,
-                                            x_pos=random.randint(100, 200), 
-                                            x_speed=random.randint(1, 4), 
-                                            y_pos=800,
-                                            y_speed=random.randint(-11, -9), 
-                                            gravity=0.10, 
-                                            width=30, 
-                                            images=target_images))   
-        self.targets.append(Slice_Target(canvas=self.canvas,
-                                            x_pos=random.randint(400, 500), 
-                                            x_speed=random.randint(-2, 2), 
-                                            y_pos=800,
-                                            y_speed=random.randint(-11, -9), 
-                                            gravity=0.10, 
-                                            width=30, 
-                                            images=target_images))  
+                                         x_pos=0 * self.scale_factor,          #random.randint(600, 900), 
+                                         x_speed=7.5 * self.scale_factor,        #random.randint(-4, -2), 
+                                         y_pos=1300 * self.scale_factor, 
+                                         y_speed=-20 * self.scale_factor,        #random.randint(-16,-12), 
+                                         gravity=0.15 * self.scale_factor, 
+                                         images=target_images))   
+        # self.targets.append(Slice_Target(canvas=self.canvas,
+        #                                     x_pos=random.randint(100, 200), 
+        #                                     x_speed=random.randint(1, 4), 
+        #                                     y_pos=1300,
+        #                                     y_speed=random.randint(-11, -9), 
+        #                                     gravity=0.10, 
+        #                                     width=30, 
+        #                                     images=target_images))   
+        # self.targets.append(Slice_Target(canvas=self.canvas,
+        #                                     x_pos=random.randint(400, 500), 
+        #                                     x_speed=random.randint(-2, 2), 
+        #                                     y_pos=1300,
+        #                                     y_speed=random.randint(-11, -9), 
+        #                                     gravity=0.10, 
+        #                                     width=30, 
+        #                                     images=target_images))  
     #     TEST <<<
 
     def draw(self):

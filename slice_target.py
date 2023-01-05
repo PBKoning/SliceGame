@@ -2,16 +2,15 @@ import pygame
 
 class Slice_Target:
 
-    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, width, images):
+    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, images):
         
         # Constants
-        self.ADJUST_X_SPEED_CHOPPED_PART_1 = 0.75
-        self.ADJUST_X_SPEED_CHOPPED_PART_2 = 1.75
+        self.ADJUST_X_SPEED_CHOPPED_PART_1 = 0.5
+        self.ADJUST_X_SPEED_CHOPPED_PART_2 = 2
 
         # Init miscellaneous variables
         self.canvas=canvas
-        self.status = "flying" 
-        self.width = width
+        self.status = "flying"         
         self.images = images
         self.rectangle = self.images[0].get_rect()
         
@@ -60,11 +59,9 @@ class Slice_Target:
             self.y_speed += self.gravity*3
 
         # See if flight of target is complete (either chopped or not)
-        if self.status == "chopped" and self.y1_pos > self.max_y_pos:
-            print("succes!")
+        if self.status == "chopped" and self.y1_pos > self.max_y_pos:            
             self.status = "succes"
-        if self.status == "flying" and self.y_pos > self.max_y_pos:        
-            print("failed!")
+        if self.status == "flying" and self.y_pos > self.max_y_pos:                    
             self.status = "failed"            
         
     def draw(self):

@@ -1,21 +1,24 @@
 import pygame
+from utilities import *
 
 class Menu:
 
-    def __init__(self, canvas, max_len_trail):
+    def __init__(self, canvas, max_len_trail, width, height, scale_factor):
 
         self.canvas = canvas
         self.max_len_trail = max_len_trail
+        self.scale_factor = scale_factor
 
+        # Load and scale image
         self.start_button = pygame.image.load(r'./images/menu.png').convert_alpha()
+        self.start_button = scale_image_by_factor(self.start_button, scale_factor)       
         
-        # Init coördinates of the image so it is centered
-        w, h = canvas.get_size() # get width and height of canvas
-        self.start_button_x = (w/2) - (self.start_button.get_width()/2)
-        self.start_button_y = (h/2) - (self.start_button.get_height()/2)
+        # Init coördinates of the image so it is centered        
+        self.start_button_x = (width/2) - (self.start_button.get_width()/2)
+        self.start_button_y = (height/2) - (self.start_button.get_height()/2)
         
         # Init variable of start button rectangle
-        self.start_button_rect = pygame. Rect(0,0,0,0)
+        self.start_button_rect = pygame.Rect(0,0,0,0)
         
 
     def draw(self):
