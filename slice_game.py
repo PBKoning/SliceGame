@@ -49,7 +49,7 @@ class SliceGame:
         # setup font
         pygame.font.init() # you have to call this at the start, 
                         # if you want to use this module.
-        self.font_arial_15 = pygame.font.SysFont('Arial', 15)
+        self.font_arial = pygame.font.SysFont('Arial', int(50*self.scale_factor))
 
         # Setup clock for fixed fps
         self.fps_clock = pygame.time.Clock()
@@ -92,12 +92,8 @@ class SliceGame:
         if SHOW_FPS:
             str_fps = "fps: "+str(int(self.fps_clock.get_fps()) )
             pygame.display.set_caption(str_fps)
-            textsurface = self.font_arial_15.render(str_fps, False, (0, 128, 21))
+            textsurface = self.font_arial.render(str_fps, False, (0, 128, 21))
             self.screen.blit(textsurface,(0,0))
-
-
-        # Trail
-        self.trail.draw()
 
         # If in portrait mode show image to rotate screen
         if self.game_state == "portrait-mode":
@@ -109,6 +105,9 @@ class SliceGame:
 
         if self.game_state == "menu":
             self.game_menu.draw() 
+        
+        # Trail
+        self.trail.draw()
 
         pygame.display.flip()           # Show new screen
 

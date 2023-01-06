@@ -6,7 +6,7 @@ DEFAULT_WINDOW_SIZE = (1920, 1080)     # All images and movement will be scaled 
 
 # PyGame settings
 FULLSCREEN = True
-WINDOW_SIZE = (1280, 720)        # This is ignored if FULLSCREEN is set to True
+WINDOW_SIZE = (960, 540)        # This is ignored if FULLSCREEN is set to True
 HIDE_MOUSE = False
 GAME_FPS = 60
 SHOW_FPS = True
