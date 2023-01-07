@@ -66,7 +66,9 @@ class SliceGame:
                            scale_factor=self.scale_factor)
 
         self.game_logic = GameLogic(canvas=self.screen,
-                                     scale_factor=self.scale_factor)
+                                    width=self.screen_width,
+                                    height=self.screen_height,
+                                    scale_factor=self.scale_factor)
 
         self.game_menu = Menu(canvas=self.screen, 
                               max_len_trail=MAX_LEN_TRAIL,

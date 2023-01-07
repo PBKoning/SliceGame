@@ -12,8 +12,10 @@ TEST_MODE = True # Test mode to set values for targets flights (x-speed, y-speed
 
 class GameLogic:
 
-    def __init__(self, canvas, scale_factor):
+    def __init__(self, canvas, width, height, scale_factor):
         self.canvas=canvas
+        self.width = width
+        self.height = height
         self.scale_factor = scale_factor
 
         self.load_images() 
@@ -95,6 +97,21 @@ class GameLogic:
             self.targets.remove("delete")
 
     def load_images(self):
+        
+        # Load images tot show missed targets
+        self.missed_targets_images = []
+        count = 0    
+
+        for i in range(4):
+            path_target = f"./images/missed_targets_{count}.png"  
+            img_missed_target = pygame.image.load(path_target).convert_alpha()
+            img_missed_target = scale_image_by_factor(img_missed_target, self.scale_factor)
+            self.missed_targets_images.append(img_missed_target)
+            count += 1
+        
+        self.image_missed_target_x = self.width - self.missed_targets_images[0].get_width()
+
+        # Targets
         self.target_images = []
         count = 0
         
@@ -156,5 +173,9 @@ class GameLogic:
             
 
     def draw(self):
+
+        self.canvas.blit(self.missed_targets_images[self.missed_targets], (self.image_missed_target_x, 0))         
+
         for target in self.targets:
             target.draw()     
+        
