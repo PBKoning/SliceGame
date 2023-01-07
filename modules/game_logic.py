@@ -1,6 +1,6 @@
 import pygame, random
-from slice_target import Slice_Target   
-from utilities import *
+from modules.slice_target import Slice_Target   
+from modules.utilities import *
 
 class GameLogic:
 

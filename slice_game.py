@@ -3,11 +3,11 @@
 # -------
 
 import pygame
-from constants import *                 # The constants contain the game settings
-from trail import Trail                 # The trail is shown when touching the screen
-from game_logic import GameLogic
-from menu import Menu      
-from rotate_screen import RotateScreen             
+from modules.constants import *                 # The constants contain the game settings
+from modules.trail import Trail                 # The trail is shown when touching the screen
+from modules.game_logic import GameLogic
+from modules.menu import Menu      
+from modules.rotate_screen import RotateScreen             
 
 class SliceGame:
 

@@ -30,3 +30,5 @@ A touchscreen game based on Fruit Ninja - build with Python and PyGame
 05-01-2023 (4): Decreased FPS to 60 again as it was slowing down the game on slower devices.
 
 06-01-2023: Added scaling of font of FPS on screen. Trail is now always on foreground.
+
+07-01-2023: Moved all modules except the slice_game.py to a dedicated moduels folder.

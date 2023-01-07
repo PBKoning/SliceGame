@@ -1,5 +1,5 @@
 import pygame
-from utilities import *
+from modules.utilities import *
 
 class RotateScreen:
 
