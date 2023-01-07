@@ -1,6 +1,12 @@
 # SliceGame
-A touchscreen game based on Fruit Ninja - build with Python and PyGame
+SliceGame is game based on Fruit Ninja, build with Python and PyGame
+It can be played with a touchscreen, but also using a mouse. To play it on an Android device you can use PyDroid
 
+**Note** 
+This game isn´t very optimized and PyGame is not the worlds fastest game engine, so I suggest playing it fullscreen on slower devices.  
+I experienced less stuttering playing it fullscreen. 
+
+# Updates
 30-12-2022 (1): First version with a simple startscreen and a trail when you swipe the screen
 
 30-12-2022 (2): Changed the startbutton
@@ -31,4 +37,6 @@ A touchscreen game based on Fruit Ninja - build with Python and PyGame
 
 06-01-2023: Added scaling of font of FPS on screen. Trail is now always on foreground.
 
-07-01-2023: Moved all modules except the slice_game.py to a dedicated moduels folder.
+07-01-2023 (1): Moved all modules except 'slice_game.py' to a dedicated modules folder.
+
+07-01-2023 (1): Improved game logic: added bombs that end the game if chopped and game ends after to much mistakes
