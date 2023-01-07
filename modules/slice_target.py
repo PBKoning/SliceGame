@@ -2,7 +2,7 @@ import pygame
 
 class Slice_Target:
 
-    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, images):
+    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, type, images):
         
         # Constants
         self.ADJUST_X_SPEED_CHOPPED_PART_1 = 0.5
@@ -10,7 +10,8 @@ class Slice_Target:
 
         # Init miscellaneous variables
         self.canvas=canvas
-        self.status = "flying"         
+        self.type = type
+        self.status = "flying"                 
         self.images = images
         self.rectangle = self.images[0].get_rect()
         self.scored = False # For scorekeeping in game logic

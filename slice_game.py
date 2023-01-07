@@ -3,7 +3,7 @@
 # -------
 
 import pygame
-from modules.constants import *                 # The constants contain the game settings
+from modules.game_constants import *            # The constants contain the game settings
 from modules.trail import Trail                 # The trail is shown when touching the screen
 from modules.game_logic import GameLogic
 from modules.menu import Menu      
@@ -12,7 +12,7 @@ from modules.rotate_screen import RotateScreen
 class SliceGame:
 
     def __init__(self):
-        
+
         # -----------
         # INIT PYGAME
         # -----------
@@ -139,11 +139,14 @@ class SliceGame:
 
             # Update game logic when game is running (targets, score, mistakes, ...)
             if self.game_state == "running":
-                self.game_logic.update()                    
+                self.game_logic.update()             
+                if self.game_logic.game_over == True:
+                    self.game_state = "menu"   # >>> TODO: game state "game-over" has to be implemented TODO <<<
 
             # Handle menu when it is shown
             if self.game_state == "menu":
                 if self.game_menu.touched(self.trail.get_len()):
+                    self.game_logic.reset()
                     self.game_state = "running"
             
             self.draw_screen()
