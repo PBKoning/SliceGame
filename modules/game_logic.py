@@ -100,6 +100,12 @@ class GameLogic:
 
     def load_images(self):
         
+        # Load image for bomb
+        path_bomb_image = "./images/bomb.png"
+        self.bomb_image = pygame.image.load(path_bomb_image).convert_alpha()
+        self.bomb_image = scale_image_by_factor(self.bomb_image, self.scale_factor)
+        self.bomb_images = (self.bomb_image, None, None) # To add images to target object. Sliced images are never used for a bomb.
+
         # Load number images for score
         self.number_images = []
         
@@ -127,8 +133,7 @@ class GameLogic:
         count = 0
         
         loading = True
-        while loading:
-            count += 1
+        while loading:            
             path_target = f"./images/targets/target_{count}.png"  
             path_target_slice_left = f"./images/targets/target_{count}_slice_left.png"  
             path_target_slice_right = f"./images/targets/target_{count}_slice_right.png"  
@@ -143,7 +148,8 @@ class GameLogic:
                 self.target_images.append((img_target, img_target_slice_left, img_target_slice_right))
             else:
                 loading = False
-      
+            count += 1
+
     def add_targets(self):       
 
         if TEST_MODE == True:         
@@ -156,7 +162,7 @@ class GameLogic:
                                             y_speed=-20 * self.scale_factor,        #random.randint(-16,-12), 
                                             gravity=0.15 * self.scale_factor, 
                                             type="normal",
-                                            images=self.target_images[0]))   
+                                            images=self.target_images[1]))   
             self.targets.append(Slice_Target(canvas=self.canvas, 
                                             x_pos=1920 * self.scale_factor,          #random.randint(600, 900), 
                                             x_speed=random.randint(-12, -2) * self.scale_factor,        #random.randint(-4, -2), 
@@ -164,7 +170,7 @@ class GameLogic:
                                             y_speed=-34 * self.scale_factor,        #random.randint(-16,-12), 
                                             gravity=0.45 * self.scale_factor, 
                                             type="bomb",
-                                            images=self.target_images[1]))                                            
+                                            images= self.bomb_images ))                                            
             # self.targets.append(Slice_Target(canvas=self.canvas,
             #                                     x_pos=random.randint(100, 200), 
             #                                     x_speed=random.randint(1, 4), 
