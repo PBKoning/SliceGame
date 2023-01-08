@@ -46,3 +46,5 @@ I experienced less stuttering playing it fullscreen.
 08-01-2023 (1): Score is shown on screen
 
 08-01-2023 (2): Added a dedicated bomb image and changed a target image into a fruit image
+
+08-01-2023 (3): Added a game-over screen
