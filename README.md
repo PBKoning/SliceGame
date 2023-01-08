@@ -42,3 +42,5 @@ I experienced less stuttering playing it fullscreen.
 07-01-2023 (2): Improved game logic: added bombs that end the game if chopped and game ends after to much mistakes
 
 07-01-2023 (3): Number of missed targets is shown on screen
+
+08-01-2023: Score is shown on screen

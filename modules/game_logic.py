@@ -9,6 +9,7 @@ from modules.utilities import *
 WAIT_TICKS = 60  # Number of ticks to wait before new targets are added
 MAX_MISSED_TARGETS = 3 # Number of targets to miss for game to end (game also ends for a higher number)
 TEST_MODE = True # Test mode to set values for targets flights (x-speed, y-speed, gravity, ...)
+OFFSET = 100 # Distance to borders for score and missed targets
 
 class GameLogic:
 
@@ -17,6 +18,7 @@ class GameLogic:
         self.width = width
         self.height = height
         self.scale_factor = scale_factor
+        self.image_offset = int(OFFSET * self.scale_factor)
 
         self.load_images() 
 
@@ -98,18 +100,27 @@ class GameLogic:
 
     def load_images(self):
         
-        # Load images tot show missed targets
-        self.missed_targets_images = []
-        count = 0    
+        # Load number images for score
+        self.number_images = []
+        
+        for i in range(10):
+            path_number_image = f"./images/numbers/{i}.png"  
+            img_number = pygame.image.load(path_number_image).convert_alpha()
+            img_number = scale_image_by_factor(img_number, self.scale_factor)
+            self.number_images.append(img_number)
+                
+        self.image_number_width = self.number_images[0].get_width()    
 
+        # Load images to show missed targets
+        self.missed_targets_images = []
+        
         for i in range(4):
-            path_target = f"./images/missed_targets_{count}.png"  
-            img_missed_target = pygame.image.load(path_target).convert_alpha()
+            path_missed_target_image = f"./images/missed_targets_{i}.png"  
+            img_missed_target = pygame.image.load(path_missed_target_image).convert_alpha()
             img_missed_target = scale_image_by_factor(img_missed_target, self.scale_factor)
             self.missed_targets_images.append(img_missed_target)
-            count += 1
-        
-        self.image_missed_target_x = self.width - self.missed_targets_images[0].get_width()
+                
+        self.image_missed_target_width = self.missed_targets_images[0].get_width()
 
         # Targets
         self.target_images = []
@@ -173,9 +184,17 @@ class GameLogic:
             
 
     def draw(self):
+        
+        # Missed targets    
+        self.canvas.blit(self.missed_targets_images[self.missed_targets], (self.width - self.image_missed_target_width- self.image_offset, self.image_offset))         
 
-        self.canvas.blit(self.missed_targets_images[self.missed_targets], (self.image_missed_target_x, 0))         
+        # Score        
+        tmp = str(self.score)
+        for count, i in enumerate(tmp):
+            int_i = int(i)
+            self.canvas.blit(self.number_images[int_i], (self.image_offset + (self.image_number_width * count), self.image_offset)) # (
 
+        # Targets
         for target in self.targets:
             target.draw()     
         
