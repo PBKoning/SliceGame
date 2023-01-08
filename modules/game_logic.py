@@ -78,14 +78,12 @@ class GameLogic:
                 # If chopped add to score and mark target as 'scored'             
                 if target.status == "chopped" and target.scored == False:                    
                     self.score += 1
-                    target.scored = True
-                    print(f"Score: {self.score} | Missed targets: {self.missed_targets}") 
+                    target.scored = True                    
 
                 # If flight has ended add mistake if not chopped and delete target from target list   
                 if target.status == "succes" or target.status == "failed":
                     if target.status == "failed":                    
-                        self.missed_targets += 1
-                        print(f"Score: {self.score} | Missed targets: {self.missed_targets}")                    
+                        self.missed_targets += 1                        
                     tmp_list.append("delete") # delete this target from the list
                 else: 
                     tmp_list.append("keep")   # keep this target in the list              

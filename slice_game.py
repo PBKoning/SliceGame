@@ -7,6 +7,7 @@ from modules.game_constants import *            # The constants contain the game
 from modules.trail import Trail                 # The trail is shown when touching the screen
 from modules.game_logic import GameLogic
 from modules.menu import Menu      
+from modules.game_over import GameOver
 from modules.rotate_screen import RotateScreen             
 
 class SliceGame:
@@ -74,8 +75,12 @@ class SliceGame:
                               max_len_trail=MAX_LEN_TRAIL,
                               width=self.screen_width,
                               height=self.screen_height,
-                              scale_factor=self.scale_factor
-                              )
+                              scale_factor=self.scale_factor)
+
+        self.game_over = GameOver(canvas=self.screen,
+                                  width=self.screen_width,
+                                  height=self.screen_height,
+                                  scale_factor=self.scale_factor)
 
         self.rotate_screen = RotateScreen(canvas=self.screen,                               
                                           width=self.screen_width,
@@ -108,6 +113,9 @@ class SliceGame:
         if self.game_state == "menu":
             self.game_menu.draw() 
         
+        if self.game_state == "game-over":
+            self.game_over.draw()
+
         # Trail
         self.trail.draw()
 
@@ -143,14 +151,20 @@ class SliceGame:
             if self.game_state == "running":
                 self.game_logic.update()             
                 if self.game_logic.game_over == True:
-                    self.game_state = "menu"   # >>> TODO: game state "game-over" has to be implemented TODO <<<
+                    self.game_over.set_wait_ticks(180)
+                    self.game_state = "game-over"   # >>> TODO: game state "game-over" has to be implemented TODO <<<
 
             # Handle menu when it is shown
             if self.game_state == "menu":
                 if self.game_menu.touched(self.trail.get_len()):
                     self.game_logic.reset()
                     self.game_state = "running"
-            
+
+            # Handle game-over when it is shown
+            if self.game_state == "game-over":
+                if self.game_over.update() == "Done":
+                    self.game_state = "menu"
+
             self.draw_screen()
             self.fps_clock.tick(GAME_FPS)   # Limit framerate to 60 FPS
 
