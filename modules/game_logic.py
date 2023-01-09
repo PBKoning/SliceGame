@@ -8,8 +8,53 @@ from modules.utilities import *
 
 WAIT_TICKS = 60  # Number of ticks to wait before new targets are added
 MAX_MISSED_TARGETS = 3 # Number of targets to miss for game to end (game also ends for a higher number)
-TEST_MODE = True # Test mode to set values for targets flights (x-speed, y-speed, gravity, ...)
+TEST_MODE = False # Test mode to set values for targets flights (x-speed, y-speed, gravity, ...)
 OFFSET = 100 # Distance to borders for score and missed targets
+
+TARGET_START_SETTINGS = [
+    {"x_pos":0,
+     "x_speed_min":1,
+     "x_speed_max":7,
+     "y_pos":1300,
+     "y_speed":-20, 
+     "gravity":0.15},
+
+     {"x_pos":480,
+     "x_speed_min":1,
+     "x_speed_max":5,
+     "y_pos":1300,
+     "y_speed":-20, 
+     "gravity":0.15},
+
+     {"x_pos":960,
+     "x_speed_min":1,
+     "x_speed_max":3,
+     "y_pos":1300,
+     "y_speed":-20, 
+     "gravity":0.15},
+
+     {"x_pos":960,
+     "x_speed_min":-4,
+     "x_speed_max":-1,
+     "y_pos":1300,
+     "y_speed":-20, 
+     "gravity":0.15},
+
+     {"x_pos":1440,
+     "x_speed_min":-6,
+     "x_speed_max":-1,
+     "y_pos":1300,
+     "y_speed":-20, 
+     "gravity":0.15},
+
+     {"x_pos":1800,
+     "x_speed_min":-7,
+     "x_speed_max":-1,
+     "y_pos":1300,
+     "y_speed":-20, 
+     "gravity":0.15},
+
+]
 
 class GameLogic:
 
@@ -156,46 +201,40 @@ class GameLogic:
             # Test mode can be used to set values for targets flights (x-speed, y-speed, gravity, ...)
             # The same target(s) will appear every time
             self.targets.append(Slice_Target(canvas=self.canvas, 
-                                            x_pos=300 * self.scale_factor,          #random.randint(600, 900), 
-                                            x_speed=random.randint(2, 6) * self.scale_factor,        #random.randint(0.5, 3.5), 
+                                            x_pos=1440 * self.scale_factor,     
+                                            x_speed=-6 * self.scale_factor,     
                                             y_pos=1300 * self.scale_factor, 
-                                            y_speed=-20 * self.scale_factor,        #random.randint(-16,-12), 
+                                            y_speed=-20 * self.scale_factor,    
                                             gravity=0.15 * self.scale_factor, 
                                             type="bomb",
-                                            images=self.bomb_images))   
-            self.targets.append(Slice_Target(canvas=self.canvas, 
-                                            x_pos=0 * self.scale_factor,          #random.randint(600, 900), 
-                                            x_speed=random.randint(3, 7) * self.scale_factor,        #random.randint(0.5, 3.5), 
-                                            y_pos=1300 * self.scale_factor, 
-                                            y_speed=-20 * self.scale_factor,        #random.randint(-16,-12), 
-                                            gravity=0.15 * self.scale_factor, 
-                                            type="normal",
-                                            images=self.target_images[1]))   
-            self.targets.append(Slice_Target(canvas=self.canvas, 
-                                            x_pos=1920 * self.scale_factor,          #random.randint(600, 900), 
-                                            x_speed=random.randint(-12, -2) * self.scale_factor,        #random.randint(-4, -2), 
-                                            y_pos=1300 * self.scale_factor, 
-                                            y_speed=-34 * self.scale_factor,        #random.randint(-16,-12), 
-                                            gravity=0.45 * self.scale_factor, 
-                                            type="bomb",
-                                            images= self.bomb_images ))                                            
-            self.targets.append(Slice_Target(canvas=self.canvas,
-                                                x_pos=random.randint(100, 200), 
-                                                x_speed=random.randint(1, 4), 
-                                                y_pos=1300,
-                                                y_speed=-19, 
-                                                gravity=0.20,
-                                                type="normal", 
-                                                images=self.target_images[0]))   
-            self.targets.append(Slice_Target(canvas=self.canvas, 
-                                            x_pos=1920 * self.scale_factor,          #random.randint(600, 900), 
-                                            x_speed=random.randint(-12, -2) * self.scale_factor,        #random.randint(-4, -2), 
-                                            y_pos=1300 * self.scale_factor, 
-                                            y_speed=-34 * self.scale_factor,        #random.randint(-16,-12), 
-                                            gravity=0.45 * self.scale_factor, 
-                                            type="normal",
-                                            images= self.target_images[0] ))       
+                                            images=self.bomb_images))               
             
+        if TEST_MODE != True:
+                        
+            for i in range(4):
+                c = random.randint(0, len(TARGET_START_SETTINGS)-1) # random choice of the target start settings for flight
+            
+                if random.randint(0, 1) == 1:
+                    # add bomb
+                    self.targets.append(Slice_Target(canvas=self.canvas, 
+                                                    x_pos=TARGET_START_SETTINGS[c]["x_pos"] * self.scale_factor,                                             
+                                                    x_speed= random.randint(TARGET_START_SETTINGS[c]["x_speed_min"],TARGET_START_SETTINGS[c]["x_speed_max"]) * self.scale_factor,     
+                                                    y_pos=TARGET_START_SETTINGS[c]["y_pos"] * self.scale_factor, 
+                                                    y_speed=TARGET_START_SETTINGS[c]["y_speed"] * self.scale_factor,    
+                                                    gravity=TARGET_START_SETTINGS[c]["gravity"] * self.scale_factor, 
+                                                    type="bomb",
+                                                    images=self.bomb_images))     
+                else:   
+                    # add fruit
+                    self.targets.append(Slice_Target(canvas=self.canvas, 
+                                                    x_pos=TARGET_START_SETTINGS[c]["x_pos"] * self.scale_factor,                                             
+                                                    x_speed= random.randint(TARGET_START_SETTINGS[c]["x_speed_min"],TARGET_START_SETTINGS[c]["x_speed_max"]) * self.scale_factor,     
+                                                    y_pos=TARGET_START_SETTINGS[c]["y_pos"] * self.scale_factor, 
+                                                    y_speed=TARGET_START_SETTINGS[c]["y_speed"] * self.scale_factor,    
+                                                    gravity=TARGET_START_SETTINGS[c]["gravity"] * self.scale_factor, 
+                                                    type="normal",
+                                                    images=self.target_images[random.randint(0, len(self.target_images)-1)]))     
+
 
     def draw(self):
         
