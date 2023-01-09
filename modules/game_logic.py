@@ -67,6 +67,8 @@ class GameLogic:
             # Handle bombs
             if target.type == "bomb":       
                 # If a bomb is chopped the game is over          
+                if target.status == "flying":
+                    tmp_list.append("keep")   # keep this target in the list  
                 if target.status == "chopped":
                     self.game_over = True   
                 # If flight of the bomb is complete (e.g. status is "failed") then delete this target from the list
@@ -86,13 +88,13 @@ class GameLogic:
                         self.missed_targets += 1                        
                     tmp_list.append("delete") # delete this target from the list
                 else: 
-                    tmp_list.append("keep")   # keep this target in the list              
+                    tmp_list.append("keep")   # keep this target in the list as it is still flying (chopped or not)            
 
         # Delete all targets that have a complete flight
         for count, value in enumerate(tmp_list): # replace target in the target list whith the string value "delete"
             if value == "delete":
                 self.targets[count] = "delete"
-
+        
         while "delete" in self.targets:             # delete all elements in the target list with the value "delete"
             self.targets.remove("delete")
 
@@ -102,7 +104,7 @@ class GameLogic:
         path_bomb_image = "./images/bomb.png"
         self.bomb_image = pygame.image.load(path_bomb_image).convert_alpha()
         self.bomb_image = scale_image_by_factor(self.bomb_image, self.scale_factor)
-        self.bomb_images = (self.bomb_image, None, None) # To add images to target object. Sliced images are never used for a bomb.
+        self.bomb_images = (self.bomb_image, self.bomb_image, self.bomb_image) # To add images to target object. Sliced images are never used for a bomb.
 
         # Load number images for score
         self.number_images = []
@@ -154,6 +156,14 @@ class GameLogic:
             # Test mode can be used to set values for targets flights (x-speed, y-speed, gravity, ...)
             # The same target(s) will appear every time
             self.targets.append(Slice_Target(canvas=self.canvas, 
+                                            x_pos=300 * self.scale_factor,          #random.randint(600, 900), 
+                                            x_speed=random.randint(2, 6) * self.scale_factor,        #random.randint(0.5, 3.5), 
+                                            y_pos=1300 * self.scale_factor, 
+                                            y_speed=-20 * self.scale_factor,        #random.randint(-16,-12), 
+                                            gravity=0.15 * self.scale_factor, 
+                                            type="bomb",
+                                            images=self.bomb_images))   
+            self.targets.append(Slice_Target(canvas=self.canvas, 
                                             x_pos=0 * self.scale_factor,          #random.randint(600, 900), 
                                             x_speed=random.randint(3, 7) * self.scale_factor,        #random.randint(0.5, 3.5), 
                                             y_pos=1300 * self.scale_factor, 
@@ -169,22 +179,22 @@ class GameLogic:
                                             gravity=0.45 * self.scale_factor, 
                                             type="bomb",
                                             images= self.bomb_images ))                                            
-            # self.targets.append(Slice_Target(canvas=self.canvas,
-            #                                     x_pos=random.randint(100, 200), 
-            #                                     x_speed=random.randint(1, 4), 
-            #                                     y_pos=1300,
-            #                                     y_speed=random.randint(-11, -9), 
-            #                                     gravity=0.10, 
-            #                                     width=30, 
-            #                                     images=target_images))   
-            # self.targets.append(Slice_Target(canvas=self.canvas,
-            #                                     x_pos=random.randint(400, 500), 
-            #                                     x_speed=random.randint(-2, 2), 
-            #                                     y_pos=1300,
-            #                                     y_speed=random.randint(-11, -9), 
-            #                                     gravity=0.10, 
-            #                                     width=30, 
-            #                                     images=target_images))              
+            self.targets.append(Slice_Target(canvas=self.canvas,
+                                                x_pos=random.randint(100, 200), 
+                                                x_speed=random.randint(1, 4), 
+                                                y_pos=1300,
+                                                y_speed=-19, 
+                                                gravity=0.20,
+                                                type="normal", 
+                                                images=self.target_images[0]))   
+            self.targets.append(Slice_Target(canvas=self.canvas, 
+                                            x_pos=1920 * self.scale_factor,          #random.randint(600, 900), 
+                                            x_speed=random.randint(-12, -2) * self.scale_factor,        #random.randint(-4, -2), 
+                                            y_pos=1300 * self.scale_factor, 
+                                            y_speed=-34 * self.scale_factor,        #random.randint(-16,-12), 
+                                            gravity=0.45 * self.scale_factor, 
+                                            type="normal",
+                                            images= self.target_images[0] ))       
             
 
     def draw(self):
@@ -196,9 +206,10 @@ class GameLogic:
         tmp = str(self.score)
         for count, i in enumerate(tmp):
             int_i = int(i)
-            self.canvas.blit(self.number_images[int_i], (self.image_offset + (self.image_number_width * count), self.image_offset)) # (
+            self.canvas.blit(self.number_images[int_i], (self.image_offset + (self.image_number_width * count), self.image_offset)) #             
 
-        # Targets
+        # Targets        
         for target in self.targets:
             target.draw()     
+            
         

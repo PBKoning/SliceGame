@@ -109,15 +109,15 @@ class SliceGame:
         # All that belongs to the running game (targets, score, missed targets, ...)    
         if self.game_state == "running":
             self.game_logic.draw()
+            self.trail.draw()
 
         if self.game_state == "menu":
             self.game_menu.draw() 
+            self.trail.draw()
         
         if self.game_state == "game-over":
+            self.game_logic.draw()
             self.game_over.draw()
-
-        # Trail
-        self.trail.draw()
 
         pygame.display.flip()           # Show new screen
 

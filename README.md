@@ -6,7 +6,7 @@ It can be played with a touchscreen, but also using a mouse. To play it on an An
 This game isn´t very optimized and PyGame is not the worlds fastest game engine, so I suggest playing it fullscreen on slower devices.  
 I experienced less stuttering playing it fullscreen. 
 
-# Updates
+# Changelog
 30-12-2022 (1): First version with a simple startscreen and a trail when you swipe the screen
 
 30-12-2022 (2): Changed the startbutton
@@ -48,3 +48,5 @@ I experienced less stuttering playing it fullscreen.
 08-01-2023 (2): Added a dedicated bomb image and changed a target image into a fruit image
 
 08-01-2023 (3): Added a game-over screen
+
+09-01-2023: Added a lemon, fixed an error in deleting targets: bomb was not on the temp list, causing it to dissapear all of a sudden sometimes.
