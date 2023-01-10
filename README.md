@@ -53,4 +53,6 @@ I experienced less stuttering playing it fullscreen.
 
 09-01-2023 (2): Added a first kind of game_mode where targets are randome chosen and have a sort of random flight.
 
-10-01-2023: Turned game logic in a playable game, with increasing difficulty
+10-01-2023 (1): Turned game logic in a playable game, with increasing difficulty
+
+10-01-2023 (2): Removed the slowest flights for targets
