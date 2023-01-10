@@ -1,4 +1,128 @@
 0 480 960 1440
+--------------
+
+
+--------
+Fastest
+
+x_pos=0
+x_speed=1 .. 15 
+y_pos=1300 
+y_speed=-47
+gravity=0.80
+
+x_pos=480
+x_speed=1 .. 12 
+y_pos=1300 
+y_speed=-47
+gravity=0.80
+
+x_pos=960
+x_speed=1 .. 8 
+y_pos=1300 
+y_speed=-47
+gravity=0.80
+
+x_pos=960
+x_speed=-9 .. -1 
+y_pos=1300 
+y_speed=-47
+gravity=0.80
+
+x_pos=1440
+x_speed=-12 .. -1 
+y_pos=1300 
+y_speed=-47
+gravity=0.80
+
+x_pos=1850
+x_speed=-16 .. -3 
+y_pos=1300 
+y_speed=-47
+gravity=0.80
+
+--------
+Faster
+
+x_pos=0
+x_speed=1 .. 14 
+y_pos=1300 
+y_speed=-40
+gravity=0.60 
+
+x_pos=480
+x_speed=1 .. 10 
+y_pos=1300 
+y_speed=-40
+gravity=0.60 
+
+x_pos=960
+x_speed=1 .. 7 
+y_pos=1300 
+y_speed=-40
+gravity=0.60 
+
+x_pos=960
+x_speed=-8 .. -1 
+y_pos=1300 
+y_speed=-40
+gravity=0.60 
+
+x_pos=1440
+x_speed=-11 .. -1 
+y_pos=1300 
+y_speed=-40
+gravity=0.60 
+
+x_pos=1850
+x_speed=-14 .. -3 
+y_pos=1300 
+y_speed=-40
+gravity=0.60 
+
+
+----------
+Normal
+
+x_pos=0
+x_speed=1 .. 12 
+y_pos=1300 
+y_speed=-34 
+gravity=0.45 
+
+x_pos=480
+x_speed=1 .. 9 
+y_pos=480
+y_speed=-34 
+gravity=0.45 
+
+x_pos=960
+x_speed=1 .. 6 
+y_pos=480
+y_speed=-34 
+gravity=0.45 
+
+x_pos=960
+x_speed=-7 .. -1 
+y_pos=480
+y_speed=-34 
+gravity=0.45 
+
+x_pos=1440
+x_speed=-10 .. -1 
+y_pos=480
+y_speed=-34 
+gravity=0.45 
+
+x_pos=1850 
+x_speed=-13 .. -3
+y_pos=1300
+y_speed=-34
+gravity=0.45
+
+
+----------
+Slowests
 
 x_pos=0
 x_speed=1 .. 7 
@@ -35,19 +159,3 @@ x_speed=-7 .. -1
 y_pos=1300
 y_speed=-20  
 gravity=0.15
-
-
-
-
- 
-x_pos=0
-x_speed=1 .. 12 
-y_pos=1300 
-y_speed=-34 
-gravity=0.45 
-
-x_pos=1850 
-x_speed=-13 .. -3
-y_pos=1300
-y_speed=-34
-gravity=0.45

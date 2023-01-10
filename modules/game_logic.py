@@ -1,60 +1,8 @@
 import pygame, random, os
 from modules.slice_target import Slice_Target   
 from modules.utilities import *
+from modules.game_logic_constants import *  
 
-# ------------------------
-# CONSTANTS FOR GAME LOGIC
-# ------------------------
-
-WAIT_TICKS = 60  # Number of ticks to wait before new targets are added
-MAX_MISSED_TARGETS = 3 # Number of targets to miss for game to end (game also ends for a higher number)
-TEST_MODE = False # Test mode to set values for targets flights (x-speed, y-speed, gravity, ...)
-OFFSET = 100 # Distance to borders for score and missed targets
-
-TARGET_START_SETTINGS = [
-    {"x_pos":0,
-     "x_speed_min":1,
-     "x_speed_max":7,
-     "y_pos":1300,
-     "y_speed":-20, 
-     "gravity":0.15},
-
-     {"x_pos":480,
-     "x_speed_min":1,
-     "x_speed_max":5,
-     "y_pos":1300,
-     "y_speed":-20, 
-     "gravity":0.15},
-
-     {"x_pos":960,
-     "x_speed_min":1,
-     "x_speed_max":3,
-     "y_pos":1300,
-     "y_speed":-20, 
-     "gravity":0.15},
-
-     {"x_pos":960,
-     "x_speed_min":-4,
-     "x_speed_max":-1,
-     "y_pos":1300,
-     "y_speed":-20, 
-     "gravity":0.15},
-
-     {"x_pos":1440,
-     "x_speed_min":-6,
-     "x_speed_max":-1,
-     "y_pos":1300,
-     "y_speed":-20, 
-     "gravity":0.15},
-
-     {"x_pos":1800,
-     "x_speed_min":-7,
-     "x_speed_max":-1,
-     "y_pos":1300,
-     "y_speed":-20, 
-     "gravity":0.15},
-
-]
 
 class GameLogic:
 
@@ -201,24 +149,49 @@ class GameLogic:
             # Test mode can be used to set values for targets flights (x-speed, y-speed, gravity, ...)
             # The same target(s) will appear every time
             self.targets.append(Slice_Target(canvas=self.canvas, 
-                                            x_pos=1440 * self.scale_factor,     
-                                            x_speed=-6 * self.scale_factor,     
+                                            x_pos=1850 * self.scale_factor,     
+                                            x_speed=-3 * self.scale_factor,     
                                             y_pos=1300 * self.scale_factor, 
-                                            y_speed=-20 * self.scale_factor,    
-                                            gravity=0.15 * self.scale_factor, 
+                                            y_speed=-47 * self.scale_factor,    
+                                            gravity=0.80 * self.scale_factor, 
                                             type="bomb",
                                             images=self.bomb_images))               
             
         if TEST_MODE != True:
+
+            number_of_targets = random.randint(1, 2)
+            max_bombs = 1
+
+            if self.score > 2:
+                number_of_targets = random.randint(2, 3)
+                max_bombs = 1
+
+            if self.score > 10:
+                number_of_targets = random.randint(2, 4)
+                max_bombs = 1    
+
+            if self.score > 20:
+                number_of_targets = random.randint(2, 5)
+                max_bombs = 2
+
+            if self.score > 30:
+                number_of_targets = random.randint(3, 6)
+                max_bombs = 2  
+
+            if self.score > 30:
+                number_of_targets = random.randint(4, 7)
+                max_bombs = 2       
                         
-            for i in range(4):
+            number_of_bombs = 0 # Count number of bombs that are added to not exceed max number
+            for i in range(number_of_targets):
                 c = random.randint(0, len(TARGET_START_SETTINGS)-1) # random choice of the target start settings for flight
             
-                if random.randint(0, 1) == 1:
+                if random.randint(0, 1) == 1 and number_of_bombs < max_bombs :
+                    number_of_bombs += 1
                     # add bomb
                     self.targets.append(Slice_Target(canvas=self.canvas, 
                                                     x_pos=TARGET_START_SETTINGS[c]["x_pos"] * self.scale_factor,                                             
-                                                    x_speed= random.randint(TARGET_START_SETTINGS[c]["x_speed_min"],TARGET_START_SETTINGS[c]["x_speed_max"]) * self.scale_factor,     
+                                                    x_speed= random.randint(TARGET_START_SETTINGS[c]["x_speed_min"],TARGET_START_SETTINGS[c]["x_speed_max"]) * self.scale_factor+random.choice((-1,1)),     
                                                     y_pos=TARGET_START_SETTINGS[c]["y_pos"] * self.scale_factor, 
                                                     y_speed=TARGET_START_SETTINGS[c]["y_speed"] * self.scale_factor,    
                                                     gravity=TARGET_START_SETTINGS[c]["gravity"] * self.scale_factor, 
@@ -226,7 +199,7 @@ class GameLogic:
                                                     images=self.bomb_images))     
                 else:   
                     # add fruit
-                    self.targets.append(Slice_Target(canvas=self.canvas, 
+                    self.targets.insert(0, Slice_Target(canvas=self.canvas, 
                                                     x_pos=TARGET_START_SETTINGS[c]["x_pos"] * self.scale_factor,                                             
                                                     x_speed= random.randint(TARGET_START_SETTINGS[c]["x_speed_min"],TARGET_START_SETTINGS[c]["x_speed_max"]) * self.scale_factor,     
                                                     y_pos=TARGET_START_SETTINGS[c]["y_pos"] * self.scale_factor, 
@@ -238,7 +211,9 @@ class GameLogic:
 
     def draw(self):
         
-        # Missed targets    
+        # Missed targets  ;
+        if self.missed_targets > 3 :
+            self.missed_targets = 3  # If > 3 the right image can not be shown
         self.canvas.blit(self.missed_targets_images[self.missed_targets], (self.width - self.image_missed_target_width- self.image_offset, self.image_offset))         
 
         # Score        
