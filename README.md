@@ -56,3 +56,5 @@ I experienced less stuttering playing it fullscreen.
 10-01-2023 (1): Turned game logic in a playable game, with increasing difficulty
 
 10-01-2023 (2): Removed the slowest flights for targets
+
+11-01-2023: Added sounds for chopping and explosion

@@ -2,7 +2,7 @@ import pygame
 
 class Slice_Target:
 
-    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, type, images):
+    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, type, images, sound):
         
         # Constants
         self.ADJUST_X_SPEED_CHOPPED_PART_1 = 0.5
@@ -15,6 +15,7 @@ class Slice_Target:
         self.images = images
         self.rectangle = self.images[0].get_rect()
         self.scored = False # For scorekeeping in game logic
+        self.sound = sound
         
         # Init variables for position and movement
         self.x_pos = x_pos
@@ -38,6 +39,7 @@ class Slice_Target:
             #target_rect = pygame.Rect(self.x_pos-self.width, self.y_pos-self.width, self.width*2, self.width*2)            
             if mouse_pressed and self.rectangle.collidepoint(mouse_x, mouse_y):
                 self.status = "chopped"
+                pygame.mixer.Sound.play(self.sound)
                 # Create 2 objects to fall down
                 self.x1_pos = self.x2_pos = self.x_pos
                 self.y1_pos = self.y2_pos = self.y_pos
