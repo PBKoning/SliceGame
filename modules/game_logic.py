@@ -15,6 +15,10 @@ class GameLogic:
 
         self.load_images() 
 
+        # Load sounds
+        self.chop_sound = pygame.mixer.Sound("./sounds/slice.wav")             
+        self.explosion_sound = pygame.mixer.Sound("./sounds/explosion.wav")
+
         self.reset() # Reset score, number of missed targets and empty the target list
         
     def reset(self):
@@ -155,7 +159,8 @@ class GameLogic:
                                             y_speed=-47 * self.scale_factor,    
                                             gravity=0.80 * self.scale_factor, 
                                             type="bomb",
-                                            images=self.bomb_images))               
+                                            images=self.bomb_images,
+                                            sound=self.explosion_sound))               
             
         if TEST_MODE != True:
 
@@ -196,7 +201,8 @@ class GameLogic:
                                                     y_speed=TARGET_START_SETTINGS[c]["y_speed"] * self.scale_factor,    
                                                     gravity=TARGET_START_SETTINGS[c]["gravity"] * self.scale_factor, 
                                                     type="bomb",
-                                                    images=self.bomb_images))     
+                                                    images=self.bomb_images,
+                                                    sound=self.explosion_sound))     
                 else:   
                     # add fruit
                     self.targets.insert(0, Slice_Target(canvas=self.canvas, 
@@ -206,7 +212,8 @@ class GameLogic:
                                                     y_speed=TARGET_START_SETTINGS[c]["y_speed"] * self.scale_factor,    
                                                     gravity=TARGET_START_SETTINGS[c]["gravity"] * self.scale_factor, 
                                                     type="normal",
-                                                    images=self.target_images[random.randint(0, len(self.target_images)-1)]))     
+                                                    images=self.target_images[random.randint(0, len(self.target_images)-1)],
+                                                    sound=self.chop_sound))     
 
 
     def draw(self):
