@@ -2,7 +2,7 @@ import pygame
 
 class Slice_Target:
 
-    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, type, images, sound):
+    def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, type, images, sound, delay):
         
         # Constants
         self.ADJUST_X_SPEED_CHOPPED_PART_1 = 0.5
@@ -16,6 +16,7 @@ class Slice_Target:
         self.rectangle = self.images[0].get_rect()
         self.scored = False # For scorekeeping in game logic
         self.sound = sound
+        self.delay = delay
         
         # Init variables for position and movement
         self.x_pos = x_pos
@@ -27,6 +28,11 @@ class Slice_Target:
         self.target_rect = pygame.Rect(0,0,0,0)
 
     def update(self, mouse_x, mouse_y, mouse_pressed):
+        
+        # Wait with updating until the delay is 0
+        if self.delay > 0:
+            self.delay -= 1
+            return
 
         # Update if still flying and not touched
         if self.status == "flying":

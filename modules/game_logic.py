@@ -160,7 +160,8 @@ class GameLogic:
                                             gravity=0.80 * self.scale_factor, 
                                             type="bomb",
                                             images=self.bomb_images,
-                                            sound=self.explosion_sound))               
+                                            sound=self.explosion_sound,
+                                            delay=random.randint(0, MAX_TARGET_DELAY)))               
             
         if TEST_MODE != True:
 
@@ -202,7 +203,8 @@ class GameLogic:
                                                     gravity=TARGET_START_SETTINGS[c]["gravity"] * self.scale_factor, 
                                                     type="bomb",
                                                     images=self.bomb_images,
-                                                    sound=self.explosion_sound))     
+                                                    sound=self.explosion_sound,
+                                                    delay=random.randint(0, MAX_TARGET_DELAY)))     
                 else:   
                     # add fruit
                     self.targets.insert(0, Slice_Target(canvas=self.canvas, 
@@ -213,7 +215,8 @@ class GameLogic:
                                                     gravity=TARGET_START_SETTINGS[c]["gravity"] * self.scale_factor, 
                                                     type="normal",
                                                     images=self.target_images[random.randint(0, len(self.target_images)-1)],
-                                                    sound=self.chop_sound))     
+                                                    sound=self.chop_sound,
+                                                    delay=random.randint(0, MAX_TARGET_DELAY)))     
 
 
     def draw(self):

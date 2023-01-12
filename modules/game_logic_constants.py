@@ -6,6 +6,7 @@ WAIT_TICKS = 60  # Number of ticks to wait before new targets are added
 MAX_MISSED_TARGETS = 3 # Number of targets to miss for game to end (game also ends for a higher number)
 TEST_MODE = False # Test mode to set values for targets flights (x-speed, y-speed, gravity, ...)
 OFFSET = 100 # Distance to borders for score and missed targets
+MAX_TARGET_DELAY = 60 # Maximum number of ticks to wait before target starts
 
 TARGET_START_SETTINGS = [
 
