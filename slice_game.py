@@ -67,6 +67,7 @@ class SliceGame:
                            scale_factor=self.scale_factor)
 
         self.game_logic = GameLogic(canvas=self.screen,
+                                    max_len_trail=MAX_LEN_TRAIL,
                                     width=self.screen_width,
                                     height=self.screen_height,
                                     scale_factor=self.scale_factor)
@@ -149,7 +150,7 @@ class SliceGame:
 
             # Update game logic when game is running (targets, score, mistakes, ...)
             if self.game_state == "running":
-                self.game_logic.update()             
+                self.game_logic.update(self.trail.get_len())             
                 if self.game_logic.game_over == True:
                     self.game_over.set_wait_ticks(180)
                     self.game_state = "game-over"   # >>> TODO: game state "game-over" has to be implemented TODO <<<
