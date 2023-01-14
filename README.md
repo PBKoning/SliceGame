@@ -61,4 +61,4 @@ I experienced less stuttering playing it fullscreen.
 
 12-01-2023: Added little random delay between thrown targets
 
-14-02-2022: Touching need to be sliced now, not only touched
+14- 2-2022: Touching need to be sliced now, not only touched
