@@ -6,8 +6,9 @@ from modules.game_logic_constants import *
 
 class GameLogic:
 
-    def __init__(self, canvas, width, height, scale_factor):
+    def __init__(self, canvas, max_len_trail, width, height, scale_factor):
         self.canvas=canvas
+        self.max_len_trail = max_len_trail
         self.width = width
         self.height = height
         self.scale_factor = scale_factor
@@ -31,7 +32,11 @@ class GameLogic:
         self.wait_counter = 0 # counter 
 
 
-    def update(self):
+    def update(self, trail_length):
+
+        self.trail_length_factor = trail_length / self.max_len_trail # Needed to see if a target is touched and not sliced
+        
+        print (self.trail_length_factor)
 
         self.update_targets()
 
@@ -59,7 +64,7 @@ class GameLogic:
         tmp_list = [] # Create a temporary list for deleting targets with a complete flight (status: succes or failed)
         for target in self.targets:
             # Update te target
-            target.update(mouse_x, mouse_y, mouse_click[0])
+            target.update(mouse_x, mouse_y, mouse_click[0], self.trail_length_factor)
 
             # Handle bombs
             if target.type == "bomb":       

@@ -1,5 +1,8 @@
 import pygame
 
+# Constants
+MINIMUM_TRAIL_LENGTH_FACTOR = 0.5
+
 class Slice_Target:
 
     def __init__(self, canvas, x_pos, x_speed, y_pos, y_speed, gravity, type, images, sound, delay):
@@ -27,8 +30,11 @@ class Slice_Target:
 
         self.target_rect = pygame.Rect(0,0,0,0)
 
-    def update(self, mouse_x, mouse_y, mouse_pressed):
+    def update(self, mouse_x, mouse_y, mouse_pressed, trail_length_factor):
         
+        self.trail_length_factor = trail_length_factor # Needed to see how long the trail is. 
+                                                       # If it's to short target will not be sliced to prevent onnly touching
+
         # Wait with updating until the delay is 0
         if self.delay > 0:
             self.delay -= 1
@@ -41,9 +47,9 @@ class Slice_Target:
             self.y_pos += self.y_speed
             self.y_speed += self.gravity
         
-            # See if target is touched
+            # See if target is sliced (not only touched)
             #target_rect = pygame.Rect(self.x_pos-self.width, self.y_pos-self.width, self.width*2, self.width*2)            
-            if mouse_pressed and self.rectangle.collidepoint(mouse_x, mouse_y):
+            if mouse_pressed and self.rectangle.collidepoint(mouse_x, mouse_y) and self.trail_length_factor >= MINIMUM_TRAIL_LENGTH_FACTOR:
                 self.status = "chopped"
                 pygame.mixer.Sound.play(self.sound)
                 # Create 2 objects to fall down

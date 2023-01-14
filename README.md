@@ -58,3 +58,7 @@ I experienced less stuttering playing it fullscreen.
 10-01-2023 (2): Removed the slowest flights for targets
 
 11-01-2023: Added sounds for chopping and explosion
+
+12-01-2023: Added little random delay between thrown targets
+
+14-02-2022: Touching need to be sliced now, not only touched
