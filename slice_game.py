@@ -118,8 +118,9 @@ class SliceGame:
         
         if self.game_state == "game-over":
             self.game_logic.draw()
-            self.game_over.draw()
             self.trail.draw()
+            self.game_over.draw()
+            
 
         pygame.display.flip()           # Show new screen
 
