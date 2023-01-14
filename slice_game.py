@@ -119,6 +119,7 @@ class SliceGame:
         if self.game_state == "game-over":
             self.game_logic.draw()
             self.game_over.draw()
+            self.trail.draw()
 
         pygame.display.flip()           # Show new screen
 
@@ -145,8 +146,9 @@ class SliceGame:
                     self.old_game_state = self.game_state # Store the old game state
                     self.game_state = "portrait-mode"
 
-            # Update trail
-            self.trail.update()
+            # Update trail always except when game is over
+            if not self.game_state == "game-over":
+                self.trail.update()
 
             # Update game logic when game is running (targets, score, mistakes, ...)
             if self.game_state == "running":
