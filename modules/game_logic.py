@@ -19,6 +19,8 @@ class GameLogic:
         # Load sounds
         self.chop_sound = pygame.mixer.Sound("./sounds/slice.wav")             
         self.explosion_sound = pygame.mixer.Sound("./sounds/explosion.wav")
+        self.missed_sound = pygame.mixer.Sound("./sounds/missed.wav")
+
 
         self.reset() # Reset score, number of missed targets and empty the target list
         
@@ -36,8 +38,6 @@ class GameLogic:
 
         self.trail_length_factor = trail_length / self.max_len_trail # Needed to see if a target is touched and not sliced
         
-        print (self.trail_length_factor)
-
         self.update_targets()
 
         if self.missed_targets >= MAX_MISSED_TARGETS:
@@ -87,7 +87,8 @@ class GameLogic:
                 # If flight has ended add mistake if not chopped and delete target from target list   
                 if target.status == "succes" or target.status == "failed":
                     if target.status == "failed":                    
-                        self.missed_targets += 1                        
+                        self.missed_targets += 1   
+                        pygame.mixer.Sound.play(self.missed_sound)                     
                     tmp_list.append("delete") # delete this target from the list
                 else: 
                     tmp_list.append("keep")   # keep this target in the list as it is still flying (chopped or not)            

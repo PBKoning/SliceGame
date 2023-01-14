@@ -63,4 +63,6 @@ I experienced less stuttering playing it fullscreen.
 
 14-02-2022 (1): Touching need to be sliced now, not only touched
 
-14-02-2022 (1): Trail is shown in game over screen, but not updated there
+14-02-2022 (2): Trail is shown in game over screen, but not updated there
+
+14-02-2022 (3): Added a missed target sound
