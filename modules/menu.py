@@ -47,7 +47,7 @@ class Menu:
         # Draw menu an store the returned rectangle. This is needed to see if mousse is pressed on image
         self.start_button_rect = self.canvas.blit(self.start_button, (self.start_button_x, self.start_button_y))
 
-    def touched(self, trail_length):
+    def start_game(self, trail_length):
 
         self.trail_length = trail_length
 

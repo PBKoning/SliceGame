@@ -210,6 +210,9 @@ class GameLogic:
     def get_new_highscore(self):
         return self.new_highscore
 
+    def get_game_over(self):
+        return self.game_over    
+
     def add_targets(self):       
 
         if TEST_MODE == True:         

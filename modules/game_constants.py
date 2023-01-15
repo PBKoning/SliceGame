@@ -2,13 +2,13 @@
 # CONSTANTS
 # ---------
 
-DEFAULT_WINDOW_SIZE = (1920, 1080)     # All images and movement will be scaled according to this window size
+DEFAULT_WINDOW_SIZE = (1920, 1080) # All images and movement will be scaled according to this window size
+
+GAME_OVER_WAIT_TICKS = 180 # Number of ticks to show the game over screen
 
 # PyGame settings
-FULLSCREEN = False
 FULLSCREEN = True
 WINDOW_SIZE = (960, 540)        # This is ignored if FULLSCREEN is set to True
-#WINDOW_SIZE = (1280, 720)
 
 SHOW_BACKGROUND_IMAGE = True
 HIDE_MOUSE = False
