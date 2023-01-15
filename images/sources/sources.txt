@@ -13,4 +13,12 @@ Strawberry: https://www.iconfinder.com/icons/2998118/fruit_healthy_strawberry_ic
 
 Lemon: https://www.iconfinder.com/icons/2137825/food_fruit_lemon_organic_vegan_vegetarian_icon
 
+Banana: https://www.iconfinder.com/icons/2137829/banana_food_fruit_organic_vegan_vegetarian_icon
+
+Cherry: https://www.iconfinder.com/icons/2137828/cherry_food_fruit_organic_vegan_vegetarian_icon
+
+Pear: https://www.iconfinder.com/icons/2137823/food_fruit_organic_pear_vegan_vegetarian_icon
+
+Apple: https://www.iconfinder.com/icons/2137818/apple_food_fruit_organic_vegan_vegetarian_icon
+
 Background: https://wallpapertag.com/brick-wallpaper

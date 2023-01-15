@@ -70,3 +70,5 @@ I experienced less stuttering playing it fullscreen.
 15-01-2023 (1): Aded game-over sound
 
 15-01-2023 (2): Added highscore and a background image
+
+15-01-2023 (2): Added more fruit images
