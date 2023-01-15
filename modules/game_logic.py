@@ -20,7 +20,7 @@ class GameLogic:
         self.chop_sound = pygame.mixer.Sound("./sounds/slice.wav")             
         self.explosion_sound = pygame.mixer.Sound("./sounds/explosion.wav")
         self.missed_sound = pygame.mixer.Sound("./sounds/missed.wav")
-
+        self.game_over_sound = pygame.mixer.Sound("./sounds/game-over.wav")
 
         self.reset() # Reset score, number of missed targets and empty the target list
         
@@ -42,6 +42,7 @@ class GameLogic:
 
         if self.missed_targets >= MAX_MISSED_TARGETS:
             self.game_over = True
+            pygame.mixer.Sound.play(self.game_over_sound) 
         
         # Add targets if there are no more targets
         if len(self.targets) == 0:
@@ -88,7 +89,8 @@ class GameLogic:
                 if target.status == "succes" or target.status == "failed":
                     if target.status == "failed":                    
                         self.missed_targets += 1   
-                        pygame.mixer.Sound.play(self.missed_sound)                     
+                        if self.missed_targets < MAX_MISSED_TARGETS:   # Play missed target sound, but not the last time,...
+                            pygame.mixer.Sound.play(self.missed_sound) # ...the last time the game-over sound is played                    
                     tmp_list.append("delete") # delete this target from the list
                 else: 
                     tmp_list.append("keep")   # keep this target in the list as it is still flying (chopped or not)            

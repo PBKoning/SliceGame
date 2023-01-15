@@ -61,8 +61,10 @@ I experienced less stuttering playing it fullscreen.
 
 12-01-2023: Added little random delay between thrown targets
 
-14-02-2022 (1): Touching need to be sliced now, not only touched
+14-01-2023 (1): Touching need to be sliced now, not only touched
 
-14-02-2022 (2): Trail is shown in game over screen, but not updated there
+14-01-2023 (2): Trail is shown in game over screen, but not updated there
 
-14-02-2022 (3): Added a missed target sound
+14-01-2023 (3): Added a missed target sound
+
+15-01-2023: Aded game-over sound
