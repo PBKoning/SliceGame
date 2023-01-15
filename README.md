@@ -71,4 +71,4 @@ I experienced less stuttering playing it fullscreen.
 
 15-01-2023 (2): Added highscore and a background image
 
-15-01-2023 (2): Added more fruit images
+15-01-2023 (3): Added more fruit images
