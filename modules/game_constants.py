@@ -10,6 +10,7 @@ FULLSCREEN = True
 WINDOW_SIZE = (960, 540)        # This is ignored if FULLSCREEN is set to True
 #WINDOW_SIZE = (1280, 720)
 
+SHOW_BACKGROUND_IMAGE = True
 HIDE_MOUSE = False
 GAME_FPS = 60
 SHOW_FPS = True

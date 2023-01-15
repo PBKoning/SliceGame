@@ -8,3 +8,4 @@ def scale_image_by_factor(image, scale_factor):
         new_width = int(old_width * scale_factor)
         new_height = int(old_height * scale_factor)            
         return pygame.transform.scale(image, (new_width, new_height))
+

@@ -5,3 +5,5 @@ Chop: https://freesound.org/people/Aris621/sounds/478145/
 Ping (missed target sound): https://freesound.org/people/D4XX/sounds/577449/
 
 Game over: https://freesound.org/people/myfox14/sounds/382310/
+
+Powerup (new highscore sound): https://freesound.org/people/jeremysykes/sounds/341240/

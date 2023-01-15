@@ -67,4 +67,6 @@ I experienced less stuttering playing it fullscreen.
 
 14-01-2023 (3): Added a missed target sound
 
-15-01-2023: Aded game-over sound
+15-01-2023 (1): Aded game-over sound
+
+15-01-2023 (2): Added highscore and a background image

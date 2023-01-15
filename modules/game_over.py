@@ -9,8 +9,8 @@ class GameOver:
         self.scale_factor = scale_factor
         self.wait_ticks = 0
 
-        # Load and scale image
-        self.game_over_image = pygame.image.load(r'./images/game-over.png').convert_alpha()
+        # Load and scale game over image
+        self.game_over_image = pygame.image.load(r'./images/game_over.png').convert_alpha()
         self.game_over_image = scale_image_by_factor(self.game_over_image, scale_factor)       
         
         # Init coördinates of the image so it is centered        
@@ -27,6 +27,6 @@ class GameOver:
         else:
             return "Waiting"    
 
-    def draw(self):
+    def draw(self, new_high_score):
         # Draw menu an store the returned rectangle. This is needed to see if mousse is pressed on image
         self.canvas.blit(self.game_over_image, (self.game_over_image_x, self.game_over_image_y))

@@ -43,6 +43,10 @@ class SliceGame:
             self.scale_factor = scale_factor_height
         
 
+        # Load background
+        self.img_background = pygame.image.load(r'./images/background.png')
+        self.img_background = pygame.transform.scale(self.img_background, (self.screen_width, self.screen_height))
+
         # Hide mouse if set
         if HIDE_MOUSE:
             pygame.mouse.set_visible(False)
@@ -76,7 +80,9 @@ class SliceGame:
                               max_len_trail=MAX_LEN_TRAIL,
                               width=self.screen_width,
                               height=self.screen_height,
-                              scale_factor=self.scale_factor)
+                              scale_factor=self.scale_factor,
+                              number_images = self.game_logic.number_images,            # Use number images from game logic also to project highscore
+                              image_number_width = self.game_logic.image_number_width)
 
         self.game_over = GameOver(canvas=self.screen,
                                   width=self.screen_width,
@@ -94,7 +100,10 @@ class SliceGame:
     def draw_screen(self):
 
         # Background
-        self.screen.fill(BG_COLOR) 
+        if SHOW_BACKGROUND_IMAGE:
+            self.screen.blit(self.img_background, (0, 0))
+        else:
+            self.screen.fill(BG_COLOR) 
 
         # Show FPS in caption and on screen
         if SHOW_FPS:
@@ -113,13 +122,13 @@ class SliceGame:
             self.trail.draw()
 
         if self.game_state == "menu":
-            self.game_menu.draw() 
+            self.game_menu.draw(self.game_logic.get_highscore()) 
             self.trail.draw()
         
         if self.game_state == "game-over":
             self.game_logic.draw()
             self.trail.draw()
-            self.game_over.draw()
+            self.game_over.draw(self.game_logic.get_new_highscore())
             
 
         pygame.display.flip()           # Show new screen

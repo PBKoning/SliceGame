@@ -15,12 +15,8 @@ class GameLogic:
         self.image_offset = int(OFFSET * self.scale_factor)
 
         self.load_images() 
-
-        # Load sounds
-        self.chop_sound = pygame.mixer.Sound("./sounds/slice.wav")             
-        self.explosion_sound = pygame.mixer.Sound("./sounds/explosion.wav")
-        self.missed_sound = pygame.mixer.Sound("./sounds/missed.wav")
-        self.game_over_sound = pygame.mixer.Sound("./sounds/game-over.wav")
+        self.load_sounds()
+        self.load_highscore()
 
         self.reset() # Reset score, number of missed targets and empty the target list
         
@@ -28,6 +24,9 @@ class GameLogic:
         self.score = 0
         self.missed_targets = 0
         self.game_over = False
+        self.new_highscore = False
+        self.show_new_highscore = False
+        self.show_new_highscore_counter = SHOW_NEW_HIGHSCORE_TICKS
 
         self.targets = [] # List of active targets
 
@@ -42,6 +41,7 @@ class GameLogic:
 
         if self.missed_targets >= MAX_MISSED_TARGETS:
             self.game_over = True
+            self.compare_highscore()
             pygame.mixer.Sound.play(self.game_over_sound) 
         
         # Add targets if there are no more targets
@@ -74,6 +74,7 @@ class GameLogic:
                     tmp_list.append("keep")   # keep this target in the list  
                 if target.status == "chopped":
                     self.game_over = True   
+                    self.compare_highscore()
                 # If flight of the bomb is complete (e.g. status is "failed") then delete this target from the list
                 if target.status == "failed":  
                     tmp_list.append("delete") # delete this target from the list 
@@ -83,7 +84,11 @@ class GameLogic:
                 # If chopped add to score and mark target as 'scored'             
                 if target.status == "chopped" and target.scored == False:                    
                     self.score += 1
-                    target.scored = True                    
+                    target.scored = True
+                    if self.score > self.highscore and self.show_new_highscore == False:
+                        self.show_new_highscore = True # Show new highscore if achieved
+                        pygame.mixer.Sound.play(self.new_highscore_sound)
+
 
                 # If flight has ended add mistake if not chopped and delete target from target list   
                 if target.status == "succes" or target.status == "failed":
@@ -105,6 +110,14 @@ class GameLogic:
 
     def load_images(self):
         
+         # Load and scale new_highscore image
+        self.img_new_highscore = pygame.image.load(r'./images/new_highscore.png').convert_alpha()
+        self.img_new_highscore = scale_image_by_factor(self.img_new_highscore, self.scale_factor) 
+        
+        # Init coördinates of the image so it is centered        
+        self.img_new_highscore_x = (self.width/2) - (self.img_new_highscore.get_width()/2)
+        self.img_new_highscore_y = (self.height/2) - (self.img_new_highscore.get_height()/2)
+
         # Load image for bomb
         path_bomb_image = "./images/bomb.png"
         self.bomb_image = pygame.image.load(path_bomb_image).convert_alpha()
@@ -154,6 +167,48 @@ class GameLogic:
             else:
                 loading = False
             count += 1
+
+    def load_sounds(self):
+       
+        self.chop_sound = pygame.mixer.Sound("./sounds/slice.wav")             
+        self.explosion_sound = pygame.mixer.Sound("./sounds/explosion.wav")
+        self.missed_sound = pygame.mixer.Sound("./sounds/missed.wav")
+        self.game_over_sound = pygame.mixer.Sound("./sounds/game_over.wav")     
+        self.new_highscore_sound = pygame.mixer.Sound("./sounds/new_highscore.wav")
+
+    def load_highscore(self):
+        
+        try:
+            # Load highscore
+            with open('./highscore.txt') as file_reader:
+                tmp = file_reader.readline()
+                self.highscore = int(tmp)
+        except:
+            # If anything goes wrong, the highscore is set to 0
+            self.highscore = 0
+
+    def save_highscore(self):
+        
+        try:
+            # Save highscore
+            with open('./highscore.txt', "w") as file_writer:
+                file_writer.write(str(self.highscore))                
+        except:
+            # If anything goes wrong, the highscore is set to 0
+            print("Highscore could not be saved")
+
+    def compare_highscore(self):
+        
+        if self.score > self.highscore:
+            self.highscore = self.score
+            self.save_highscore()
+            self.new_highscore = True
+
+    def get_highscore(self):
+        return self.highscore
+
+    def get_new_highscore(self):
+        return self.new_highscore
 
     def add_targets(self):       
 
@@ -239,6 +294,11 @@ class GameLogic:
         for count, i in enumerate(tmp):
             int_i = int(i)
             self.canvas.blit(self.number_images[int_i], (self.image_offset + (self.image_number_width * count), self.image_offset)) #             
+
+        # Show new highscore
+        if self.show_new_highscore == True and self.show_new_highscore_counter > 0:
+            self.canvas.blit(self.img_new_highscore, (self.img_new_highscore_x, self.img_new_highscore_y))
+            self.show_new_highscore_counter -= 1
 
         # Targets        
         for target in self.targets:
