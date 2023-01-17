@@ -3,9 +3,9 @@ import pygame
 from modules.game_constants import *            # The constants in this module contain the game settings
 from modules.trail import Trail                 # The trail is shown when touching the screen
 from modules.game_logic import GameLogic
-from modules.menu import Menu      
+from modules.menu import Menu
 from modules.game_over import GameOver
-from modules.rotate_screen import RotateScreen             
+from modules.rotate_screen import RotateScreen
 
 class SliceGame:
     """Class that creates a visual game made with PyGame.
